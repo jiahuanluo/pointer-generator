@@ -199,7 +199,7 @@ class Batch(object):
         # Note: our decoder inputs and targets must be the same length for each batch (second dimension = max_dec_steps) because we do not use a dynamic_rnn for decoding. However I believe this is possible, or will soon be possible, with Tensorflow 1.0, in which case it may be best to upgrade to that.
         self.dec_batch = np.zeros((hps.batch_size.value, hps.max_dec_steps.value), dtype=np.int32)
         self.target_batch = np.zeros((hps.batch_size.value, hps.max_dec_steps.value), dtype=np.int32)
-        self.dec_padding_mask = np.zeros((hps.batch_size.value.value, hps.max_dec_steps.value), dtype=np.float32)
+        self.dec_padding_mask = np.zeros((hps.batch_size.value, hps.max_dec_steps.value), dtype=np.float32)
 
         # Fill in the numpy arrays
         for i, ex in enumerate(example_list):
