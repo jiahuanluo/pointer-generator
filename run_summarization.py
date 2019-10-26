@@ -306,7 +306,7 @@ def main(unused_argv):
                    'hidden_dim', 'emb_dim', 'batch_size', 'max_dec_steps', 'max_enc_steps', 'coverage', 'cov_loss_wt',
                    'pointer_gen']
     hps_dict = {}
-    for key, val in FLAGS.__flags.iteritems():  # for each flag
+    for key, val in FLAGS.__flags.items():  # for each flag
         if key in hparam_list:  # if it's in the list
             hps_dict[key] = val  # add it to the dict
     hps = namedtuple("HParams", hps_dict.keys())(**hps_dict)
@@ -316,14 +316,14 @@ def main(unused_argv):
 
     tf.set_random_seed(111)  # a seed value for randomness
 
-    if hps.mode == 'train':
+    if hps.mode.value == 'train':
         print("creating model...")
         model = SummarizationModel(hps, vocab)
         setup_training(model, batcher)
-    elif hps.mode == 'eval':
+    elif hps.mode.value == 'eval':
         model = SummarizationModel(hps, vocab)
         run_eval(model, batcher, vocab)
-    elif hps.mode == 'decode':
+    elif hps.mode.value == 'decode':
         decode_model_hps = hps  # This will be the hyperparameters for the decoder model
         decode_model_hps = hps._replace(
             max_dec_steps=1)  # The model is configured with max_dec_steps=1 because we only ever run one step of the decoder at a time (to do beam search). Note that the batcher is initialized with max_dec_steps equal to e.g. 100 because the batches need to contain the full summaries

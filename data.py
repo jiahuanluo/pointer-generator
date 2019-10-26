@@ -54,7 +54,7 @@ class Vocab(object):
       self._count += 1
 
     # Read the vocab file and add words up to max_size
-    with open(vocab_file, 'r') as vocab_f:
+    with open(vocab_file, 'r', encoding='utf-8') as vocab_f:
       for line in vocab_f:
         pieces = line.split()
         if len(pieces) != 2:
@@ -98,7 +98,7 @@ class Vocab(object):
       fpath: place to write the metadata file
     """
     print("Writing word embedding metadata file to %s..." % (fpath))
-    with open(fpath, "w") as f:
+    with open(fpath, "w", encoding='utf-8') as f:
       fieldnames = ['word']
       writer = csv.DictWriter(f, delimiter="\t", fieldnames=fieldnames)
       for i in range(self.size()):
@@ -129,7 +129,7 @@ def example_generator(data_path, single_pass):
     else:
       random.shuffle(filelist)
     for f in filelist:
-      reader = open(f, 'rb')
+      reader = open(f, 'rb', encoding="utf-8")
       while True:
         len_bytes = reader.read(8)
         if not len_bytes: break # finished reading this file
