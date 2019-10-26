@@ -193,7 +193,7 @@ class Batch(object):
             """
         # Pad the inputs and targets
         for ex in example_list:
-            ex.pad_decoder_inp_targ(hps.max_dec_steps, self.pad_id)
+            ex.pad_decoder_inp_targ(hps.max_dec_steps.value, self.pad_id)
 
         # Initialize the numpy arrays.
         # Note: our decoder inputs and targets must be the same length for each batch (second dimension = max_dec_steps) because we do not use a dynamic_rnn for decoding. However I believe this is possible, or will soon be possible, with Tensorflow 1.0, in which case it may be best to upgrade to that.

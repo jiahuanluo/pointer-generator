@@ -129,7 +129,7 @@ def example_generator(data_path, single_pass):
     else:
       random.shuffle(filelist)
     for f in filelist:
-      reader = open(f, 'rb', encoding="utf-8")
+      reader = open(f, 'rb')
       while True:
         len_bytes = reader.read(8)
         if not len_bytes: break # finished reading this file
